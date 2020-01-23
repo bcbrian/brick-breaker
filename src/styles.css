@@ -1,4 +1,9 @@
-.App {
-  font-family: sans-serif;
-  text-align: center;
+.container {
+  width: 500px;
+  height: 700px;
+  background-color: #66339988;
+  border-radius: 4px;
+  border: 2px solid rebeccapurple;
+  position: relative;
+  margin: 20px auto;
 }
