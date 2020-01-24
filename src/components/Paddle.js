@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Paddle.css";
 
-export default function Paddle() {
-  const [paddleX, setPaddleX] = useState(0);
+export default function Paddle({ paddleX, dispatch }) {
   function handleMouse(e) {
     let boundedX;
     const offset = (window.innerWidth - 300) / 2;
@@ -13,7 +12,7 @@ export default function Paddle() {
     } else {
       boundedX = e.x - offset;
     }
-    setPaddleX(boundedX);
+    dispatch({ type: "MOVE_PADDLE", payload: { x: boundedX } });
   }
   useEffect(() => {
     window.addEventListener("mousemove", handleMouse);
