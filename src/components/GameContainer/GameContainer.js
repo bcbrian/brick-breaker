@@ -19,7 +19,7 @@ export default function GameContainer() {
       }}
     >
       {state.bricks.map(brick => (
-        <Brick {...brick} />
+        <Brick key={brick.id} {...brick} />
       ))}
 
       <Paddle paddleX={state.paddle.x} />

@@ -10,7 +10,8 @@ export default function createState(level, overrides) {
       x: 250,
       y: 250,
       dx: 5,
-      dy: 5
+      dy: 5,
+      isMoving: false
     },
     bricks: makeLevel(level),
     walls: [

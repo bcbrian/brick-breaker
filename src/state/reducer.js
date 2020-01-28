@@ -1,11 +1,18 @@
-import { MOVE_BALL, MOVE_PADDLE, BRICK_COLLISION } from "./actions";
+import {
+  MOVE_BALL,
+  MOVE_PADDLE,
+  BRICK_COLLISION,
+  PRESS_START
+} from "./actions";
 
 export default function reducer(state, action) {
   switch (action.type) {
     case MOVE_PADDLE:
       return { ...state, paddle: action.payload };
     case MOVE_BALL:
-      return { ...state, ball: action.payload };
+      return { ...state, ball: { ...state.ball, ...action.payload } };
+    case PRESS_START:
+      return { ...state, ball: { ...state.ball, ...action.payload } };
     case BRICK_COLLISION:
       const newBricks = state.bricks.reduce((bricks, brick) => {
         if (action.payload.bricks.find(b => b.id === brick.id)) {
@@ -28,6 +35,6 @@ export default function reducer(state, action) {
         bricks: newBricks
       };
     default:
-      throw new Error();
+      throw new Error("UNKOWN ACTION:", action.type);
   }
 }

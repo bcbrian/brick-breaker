@@ -9,8 +9,27 @@ export default function useGameLoop(state, dispatch, actions) {
       let y = state.ball.y;
       let dx = state.ball.dx;
       let dy = state.ball.dy;
+      let isMoving = state.ball.isMoving;
 
       let paddleX = state.paddle.x;
+
+      if (!isMoving) {
+        return dispatch({
+          type: actions.MOVE_BALL,
+          payload: {
+            dx: dx,
+            dy: dy,
+            x:
+              paddleX +
+              DIMENSIONS.DEFAULT.PADDLE.WIDTH / 2 -
+              DIMENSIONS.DEFAULT.BALL.WIDTH / 2,
+            y:
+              DIMENSIONS.DEFAULT.HEIGHT -
+              (DIMENSIONS.DEFAULT.PADDLE.HEIGHT +
+                2 * DIMENSIONS.DEFAULT.BALL.HEIGHT)
+          }
+        });
+      }
 
       const ball = {
         x,
@@ -25,10 +44,25 @@ export default function useGameLoop(state, dispatch, actions) {
         return willCollide(ball, wall);
       });
 
-      // if (collisions[3].y) {
-      //   //reset logic
-      //   dy = -dy;
-      // }
+      if (collisions[3].y) {
+        //reset logic
+        return dispatch({
+          type: actions.MOVE_BALL,
+          payload: {
+            isMoving: false,
+            dx: dx,
+            dy: dy,
+            x:
+              paddleX +
+              DIMENSIONS.DEFAULT.PADDLE.WIDTH / 2 -
+              DIMENSIONS.DEFAULT.BALL.WIDTH / 2,
+            y:
+              DIMENSIONS.DEFAULT.HEIGHT -
+              (DIMENSIONS.DEFAULT.PADDLE.HEIGHT +
+                2 * DIMENSIONS.DEFAULT.BALL.HEIGHT)
+          }
+        });
+      }
 
       if (collisions.some(c => c.x)) {
         dx = -dx;
