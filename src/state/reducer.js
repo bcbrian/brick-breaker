@@ -2,11 +2,14 @@ import {
   MOVE_BALL,
   MOVE_PADDLE,
   BRICK_COLLISION,
-  PRESS_START
+  PRESS_START,
+  ADD_SCORE
 } from "./actions";
 
 export default function reducer(state, action) {
   switch (action.type) {
+    case ADD_SCORE:
+      return { ...state, score: state.score + action.payload };
     case MOVE_PADDLE:
       return { ...state, paddle: action.payload };
     case MOVE_BALL:

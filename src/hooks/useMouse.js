@@ -1,13 +1,6 @@
 import { useEffect } from "react";
 import { DIMENSIONS } from "../utils/constants";
 
-/**
- *
- * @param {*} cb
- * @param {*} isMoving
- *
- * TYpe some helpful things here
- */
 export default function useMouse(cb, isMoving) {
   useEffect(() => {
     function handleMouse(e) {

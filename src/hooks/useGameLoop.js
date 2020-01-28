@@ -90,6 +90,10 @@ export default function useGameLoop(state, dispatch, actions) {
             bricks: yCol
           }
         });
+        dispatch({
+          type: actions.ADD_SCORE,
+          payload: yCol.length * 10
+        });
       }
       if (xCol.length) {
         dx = -dx;
@@ -98,6 +102,10 @@ export default function useGameLoop(state, dispatch, actions) {
           payload: {
             bricks: xCol
           }
+        });
+        dispatch({
+          type: actions.ADD_SCORE,
+          payload: xCol.length * 10
         });
       }
 
