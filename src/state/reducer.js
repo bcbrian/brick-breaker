@@ -3,11 +3,19 @@ import {
   MOVE_PADDLE,
   BRICK_COLLISION,
   PRESS_START,
-  ADD_SCORE
+  ADD_SCORE,
+  DIE,
+  GAME_OVER
 } from "./actions";
+import levelOne from "../levels/one";
+import createState from "./createState";
 
 export default function reducer(state, action) {
   switch (action.type) {
+    case GAME_OVER:
+      return createState(levelOne);
+    case DIE:
+      return { ...state, lives: state.lives - 1 };
     case ADD_SCORE:
       return { ...state, score: state.score + action.payload };
     case MOVE_PADDLE:

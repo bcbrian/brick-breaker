@@ -13,6 +13,26 @@ export default function useGameLoop(state, dispatch, actions) {
 
       let paddleX = state.paddle.x;
 
+      if (state.lives < 0) {
+        dispatch({ type: actions.GAME_OVER });
+        return dispatch({
+          type: actions.MOVE_BALL,
+          payload: {
+            isMoving: false,
+            dx: dx,
+            dy: dy,
+            x:
+              paddleX +
+              DIMENSIONS.DEFAULT.PADDLE.WIDTH / 2 -
+              DIMENSIONS.DEFAULT.BALL.WIDTH / 2,
+            y:
+              DIMENSIONS.DEFAULT.HEIGHT -
+              (DIMENSIONS.DEFAULT.PADDLE.HEIGHT +
+                2 * DIMENSIONS.DEFAULT.BALL.HEIGHT)
+          }
+        });
+      }
+
       if (!isMoving) {
         return dispatch({
           type: actions.MOVE_BALL,
@@ -46,6 +66,7 @@ export default function useGameLoop(state, dispatch, actions) {
 
       if (collisions[3].y) {
         //reset logic
+        dispatch({ type: actions.DIE });
         return dispatch({
           type: actions.MOVE_BALL,
           payload: {
