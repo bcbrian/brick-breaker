@@ -5,15 +5,28 @@ import {
   PRESS_START,
   ADD_SCORE,
   DIE,
-  GAME_OVER
+  GAME_OVER,
+  START_GAME
 } from "./actions";
 import levelOne from "../levels/one";
 import createState from "./createState";
+import axios from "axios";
 
 export default function reducer(state, action) {
   switch (action.type) {
+    case START_GAME:
+      return createState(levelOne, {
+        isPlaying: true,
+      });
     case GAME_OVER:
+      const initials = prompt("YOUR SCORE WAS: "+ state.score+"\nINITALS PLEASE FOR HIGH SCORE");
+      axios.post("http://localhost:5000/api/v1/high-scores",{
+        initials,
+        score: state.score,
+      }).then(res =>console.log(res) )
+      // return state;
       return createState(levelOne);
+      
     case DIE:
       return { ...state, lives: state.lives - 1 };
     case ADD_SCORE:

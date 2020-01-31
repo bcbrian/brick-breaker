@@ -5,3 +5,4 @@ export const PRESS_START = "PRESS_START";
 export const ADD_SCORE = "ADD_SCORE";
 export const DIE = "DIE";
 export const GAME_OVER = "GAME_OVER";
+export const START_GAME = "START_GAME";

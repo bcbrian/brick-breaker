@@ -3,8 +3,9 @@ import { DIMENSIONS } from "../utils/constants";
 
 export default function createState(level, overrides) {
   return {
+    isPlaying: false,
     score: 0,
-    lives: 3,
+    lives: 0,
     paddle: {
       x: 0
     },
